@@ -14,7 +14,7 @@ except ImportError:
 
 username = "USERNAME"
 password = "PASSWORD"
-subreddit_name = "mod"
+subreddit_name = "teenagers"
 
 
 '''
