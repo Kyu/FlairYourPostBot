@@ -54,11 +54,6 @@ subreddit = session.get_subreddit(subreddit_name)
 
 
 @asyncio.coroutine
-def get_subreddit_settings(name):
-    raise NotImplementedError("TODO: Subreddit settings")
-
-
-@asyncio.coroutine
 def refresh_sesison():
     '''Re-logs in every n seconds'''
     while True:
@@ -82,20 +77,6 @@ def inbox_stuff():
     while True:
         try:
             for message in session.get_unread():
-                if message.body.startswith('**gadzooks!'):
-                    print("Checking out possible mod invite")
-                    try:
-                        print("Accepted Invite")
-                        sr = session.get_info(thing_id=message.subreddit.fullname)
-                        sr.accept_moderator_invite()
-                    except AttributeError:  # I cant rememver why I put this here but
-                        print("Tried to parse an invalid invite")
-                        continue
-                    except praw.errors.InvalidInvite:
-                        print("Tried to parse an invalid invite")
-                        continue
-                    message.mark_as_read()
-
                 if message.parent_id:
                     if message.parent_id[3:] in no_flair:
                         flaired = False
@@ -182,7 +163,7 @@ if __name__ == "__main__":
     print("Registering session refresh\n")
     ensure_future(refresh_sesison())
 
-    print("Registering Mod Invites\n")
+    print("Registering Inbox stuff\n")
     ensure_future(inbox_stuff())
 
     print("Registering Main\n")
