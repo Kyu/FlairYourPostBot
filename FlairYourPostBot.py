@@ -83,7 +83,7 @@ def inbox_stuff():
                         post = session.get_submission(submission_id=no_flair[message.parent_id[3:]])
                         choices = post.get_flair_choices()['choices']
                         for ch in choices:
-                            if message.body == ch['flair_text']:
+                            if message.body.lower() == ch['flair_text'].lower():
                                 new_flair = ch['flair_text']
                                 post.set_flair(new_flair)
                                 flaired = True
