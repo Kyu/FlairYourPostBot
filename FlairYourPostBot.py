@@ -85,7 +85,8 @@ def inbox_stuff():
                         for ch in choices:
                             if message.body.lower() == ch['flair_text'].lower():
                                 new_flair = ch['flair_text']
-                                post.set_flair(new_flair)
+                                new_flair_css = ch['flair_css_class']
+                                post.set_flair(new_flair, new_flair_css)
                                 flaired = True
                                 break
                         if flaired:
